@@ -3,6 +3,7 @@ import Layout from "@/components/account/admin";
 import Link from "next/link";
 
 const menu = [
+    { title: "Notifications", icon: "bell", link: "/my-account/admin/notifications" },
     { title: "Orders", icon: "box", link: "/my-account/admin/orders" },
     { title: "Upgrade", icon: "coin", link: "/my-account/admin/upgrades" },
     { title: "Admin Messages", icon: "chat", link: "/my-account/admin/admin-messages" },
@@ -11,6 +12,8 @@ const menu = [
     { title: "Profiles", icon: "person-vcard", link: "/my-account/admin/profiles" },
     { title: "Withdraw", icon: "cash", link: "/my-account/admin/withdrawns" },
     { title: "Users", icon: "people", link: "/my-account/admin/users" },
+    { title: "Advertisement", icon: "layout-text-window", link: "/my-account/admin/ads" },
+    { title: "Mail", icon: "envelope", link: "/my-account/admin/mail" },
 ]
 
 function Card({ list }: { list: { title: string, icon: string, link: string }[] }) {
