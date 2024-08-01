@@ -1,0 +1,77 @@
+{
+    "profile": {
+        "cover": { "FREE": false, "PREMIUM": true, "BUSINESS": true, "options": {
+            "name": "avatar", "required": true, "type": "file", "icon":"star-fill", "title": "Avatar", "placeholder":"Avatar"
+        }},
+        "avatar": { "FREE": false, "PREMIUM": true, "BUSINESS": true, "options": {
+            "name": "avatar", "required": true, "type": "file", "icon":"star-fill", "title": "Avatar", "placeholder":"Avatar"
+        }},
+        "username": { "FREE": true, "PREMIUM": true, "BUSINESS": true, "options": {
+            "name": "username", "max": 32, "required": true, "type": "text", "icon":"star-fill", "title": "Username", "placeholder":"Enter Your Username"
+        }},
+        "fullname": { "FREE": true, "PREMIUM": true, "BUSINESS": true, "options": {
+            "name": "fullname", "max": 50, "required": true, "type": "text", "icon":"star-fill", "title": "Full Name", "placeholder":"Enter Your Name"
+        }},
+        "phone": { "FREE": true, "PREMIUM": true, "BUSINESS": true , "options": {
+            "name": "phone", "max": 20, "required": true, "type":"tel", "pattern": "([0-9 +]){6,14}", "icon":"star-fill", "title": "Phone Number", "placeholder":"Enter Your Phone Number"
+        }},
+        "bio": { "FREE": true, "PREMIUM": true, "BUSINESS": true, "options": {
+            "name": "bio", "max": 250, "required": false, "type":"text", "title": "Bio", "placeholder":"Enter Your Bio"
+        }},
+        "video": { "FREE": false, "PREMIUM": true, "BUSINESS": true, "options": {
+            "name": "video", "max": 190, "required": false, "type": "text", "title": "YouTube Video", "placeholder":"Enter Your YouTube Video"
+        }}
+    },
+    "contact": {
+        "profession": { "FREE": true, "PREMIUM": true, "BUSINESS": true, "options": {
+            "name": "profession", "max": 100, "required": false, "type":"text", "title": "Profession", "placeholder":"Enter Profession"
+        } },
+        "email": { "FREE": true, "PREMIUM": true, "BUSINESS": true, "options": {
+            "name": "email", "max": 32, "required": false, "type": "text", "title": "Email Address", "placeholder":"Enter Your Email Address"
+        }},
+        "address": { "FREE": true, "PREMIUM": true, "BUSINESS": true, "options": {
+            "name": "address", "max": 250, "required": false, "type": "textarea", "title": "Address", "placeholder":"Enter Your Address"
+        }}
+    },
+    "company": {
+        "company": { "FREE": false, "PREMIUM": true, "BUSINESS": true, "options": {
+            "name": "company", "max": 190, "required": false, "type": "textarea", "title": "Company Name", "placeholder":"Enter Your Company Name"
+        } },
+        "designation": { "FREE": false, "PREMIUM": true, "BUSINESS": true, "options": {
+            "name": "designation", "max": 190, "required": false, "type": "textarea", "title": "Designation", "placeholder":"Enter Your Designation"
+        } },
+        "number": { "FREE": false, "PREMIUM": true, "BUSINESS": true, "options": {
+            "name": "number", "max": 250, "required": false, "type": "textarea", "title": "Official Number", "placeholder":"Enter Your Official Number"
+        } },
+        "companyemail": { "FREE": false, "PREMIUM": true, "BUSINESS": true, "options": {
+            "name": "companyemail", "max": 250, "required": false, "type": "textarea", "title": "Official Email", "placeholder":"Enter Your Official Email"
+        } },
+        "website": { "FREE": false, "PREMIUM": true, "BUSINESS": true, "options": {
+            "name": "website", "max": 250, "required": false, "type": "textarea", "title": "Website", "placeholder":"Enter Your Website"
+        } },
+        "officeAddress": { "FREE": false, "PREMIUM": true, "BUSINESS": true, "options": {
+            "name": "officeAddress", "max": 250, "required": false, "type": "textarea", "title": "Office Address", "placeholder":"Enter Your Office Address"
+        } },
+        "branchAddress": { "FREE": false, "PREMIUM": true, "BUSINESS": true, "options": {
+            "name": "branchAddress", "max": 250, "required": false, "type": "textarea", "title": "Branch Address", "placeholder":"Enter Your Branch Address"
+        } }
+    },
+    "socials": [
+        { "title": "WhatsApp", "type": true, "logo": "bi bi-whatsapp" , "plan":{ "FREE": true, "PREMIUM": true, "BUSINESS": true }},
+        { "title": "Website", "type": true, "logo": "bi bi-globe" , "plan":{ "FREE": false, "PREMIUM": true, "BUSINESS": true }},
+        { "title": "Facebook", "type": true, "logo": "bi bi-facebook" , "plan":{ "FREE": true, "PREMIUM": true, "BUSINESS": true }},
+        { "title": "YouTube", "type": true, "logo": "bi bi-youtube" , "plan":{ "FREE": false, "PREMIUM": true, "BUSINESS": true }},
+        { "title": "Map", "type": true, "logo": "bi bi-geo" , "plan":{ "FREE": true, "PREMIUM": true, "BUSINESS": true }},
+        { "title": "Twitter", "type": true, "logo": "bi bi-twitter" , "plan":{ "FREE": false, "PREMIUM": true, "BUSINESS": true }},
+        { "title": "Instagram", "type": true, "logo": "bi bi-instagram" , "plan":{ "FREE": false, "PREMIUM": true, "BUSINESS": true }},
+        { "title": "Linkedin", "type": true, "logo": "bi bi-linkedin" , "plan":{ "FREE": false, "PREMIUM": true, "BUSINESS": true }},
+        { "title": "Pinterest", "type": true, "logo": "bi bi-pinterest" , "plan":{ "FREE": false, "PREMIUM": true, "BUSINESS": true }},
+        { "title": "TikTok", "type": true, "logo": "bi bi-tiktok" , "plan":{ "FREE": false, "PREMIUM": true, "BUSINESS": true }},
+        { "title": "Reddit", "type": true, "logo": "bi bi-reddit" , "plan":{ "FREE": false, "PREMIUM": true, "BUSINESS": true }},
+        { "title": "Snapchat", "type": true, "logo": "bi bi-snapchat" , "plan":{ "FREE": false, "PREMIUM": true, "BUSINESS": true }},
+        { "title": "Freelancer", "type": true, "logo": "bi bi-circle" , "plan":{ "FREE": false, "PREMIUM": true, "BUSINESS": true }},
+        { "title": "Fiverr", "type": true, "logo": "bi bi-circle" , "plan":{ "FREE": false, "PREMIUM": true, "BUSINESS": true }},
+        { "title": "UpWork", "type": true, "logo": "bi bi-circle" , "plan":{ "FREE": false, "PREMIUM": true, "BUSINESS": true }},
+        { "title": "People Per Hour", "type": true, "logo": "bi bi-circle", "plan":{ "FREE": false, "PREMIUM": true, "BUSINESS": true } }
+    ]
+}

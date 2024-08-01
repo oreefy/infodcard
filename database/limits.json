@@ -1,0 +1,26 @@
+{
+    "product": {
+        "PREMIUM": 2,
+        "BUSINESS": 10
+    },
+    "service": {
+        "PREMIUM": 2,
+        "BUSINESS": 10
+    },
+    "mobileBank": {
+        "PREMIUM": 2,
+        "BUSINESS": 4
+    },
+    "localBank": {
+        "PREMIUM": 2,
+        "BUSINESS": 4
+    },
+    "globalBank": {
+        "PREMIUM": 2,
+        "BUSINESS": 4
+    },
+    "gallery": {
+        "PREMIUM": 10,
+        "BUSINESS": 15
+    }
+}

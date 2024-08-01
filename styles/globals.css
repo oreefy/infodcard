@@ -1,0 +1,52 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .box {
+    @apply bg-white/50 p-5 rounded-xl mb-5;
+  }
+  .action-btn {
+    @apply bg-white/50 px-4 py-3 rounded-full text-xl inline-block active:scale-75 duration-200 focus:bg-white/80;
+  }
+  .link {
+    @apply font-bold hover:text-orange-700;
+  }
+  .inp-label {
+    @apply block font-semibold mb-1;
+  }
+  .inp-text[type="number"]::-webkit-inner-spin-button,
+  .inp-text[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .inp-text {
+    @apply w-full px-3 py-2 rounded-lg bg-white/50 hover:bg-white focus:bg-white placeholder:text-slate-400 text-black font-bold duration-200 disabled:cursor-not-allowed disabled:bg-black/10;
+  }
+  .scroll::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .scroll::-webkit-scrollbar-track {
+    @apply bg-slate-400 dark:bg-slate-400;
+    border-radius: 10px;
+  }
+
+  .scroll::-webkit-scrollbar-track:hover {
+    @apply bg-slate-500 dark:bg-slate-500;
+  }
+
+  .scroll::-webkit-scrollbar-thumb {
+    @apply bg-gray-600 dark:bg-slate-600;
+    border-radius: 10px;
+  }
+
+  .scroll::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-700 dark:bg-slate-700;
+  }
+
+  .scroll::-webkit-scrollbar-thumb:active {
+    @apply bg-gray-600 dark:bg-slate-300;
+  }
+  @import url("./nprogress");
+}

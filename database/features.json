@@ -1,0 +1,98 @@
+[
+    {
+        "feature": "Account Lifetime Validity",
+        "free": true,
+        "premium": true,
+        "business": true
+    },
+    {
+        "feature": "Contact Massaging",
+        "free": true,
+        "premium": true,
+        "business": true
+    },
+    {
+        "feature": "Profile Create",
+        "free": true,
+        "premium": true,
+        "business": true
+    },
+    {
+        "feature": "Profile Picture",
+        "free": false,
+        "premium": true,
+        "business": true
+    },
+    {
+        "feature": "Cover Photo",
+        "free": false,
+        "premium": true,
+        "business": true
+    },
+    {
+        "feature": "Custom Field",
+        "free": false,
+        "premium": true,
+        "business": true
+    },
+    {
+        "feature": "Company Info",
+        "free": false,
+        "premium": true,
+        "business": true
+    },
+    {
+        "feature": "YouTube Video",
+        "free": false,
+        "premium": true,
+        "business": true
+    },
+    {
+        "feature": "Multi Profile (MAX 10)",
+        "free": false,
+        "premium": false,
+        "business": true
+    },
+    {
+        "feature": "Extend Profile",
+        "free": false,
+        "premium": false,
+        "business": true
+    },
+    {
+        "feature": "Calling SIM",
+        "free": "1",
+        "premium": "2",
+        "business": "2"
+    },
+    {
+        "feature": "Social Media",
+        "free": "5",
+        "premium": "16",
+        "business": "16"
+    },
+    {
+        "feature": "Products",
+        "free": "0",
+        "premium": "02",
+        "business": "10"
+    },
+    {
+        "feature": "Service",
+        "free": "0",
+        "premium": "02",
+        "business": "10"
+    },
+    {
+        "feature": "Bank Account",
+        "free": "0",
+        "premium": "06",
+        "business": "12"
+    },
+    {
+        "feature": "Ads Block Day",
+        "free": "30",
+        "premium": "365",
+        "business": "365"
+    }
+]

@@ -1,0 +1,344 @@
+generator client {
+  provider = "prisma-client-js"
+  // output   = "../.prisma"
+}
+
+datasource db {
+  provider          = "mysql"
+  url               = env("DATABASE_URL")
+  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model User {
+  // id            String        @id @default(auto()) @map("_id") @db.ObjectId
+  id                 Int             @id @default(autoincrement())
+  unique             String          @unique @default(uuid())
+  ads                DateTime        @default(now())
+  phone              String          @unique
+  email              String          @unique
+  password           String
+  code               String          @unique
+  plan               Plan            @default(FREE)
+  profileLength      Int             @default(1)
+  profile            Profile[]
+  messages           Message[]
+  adminMessages      AdminMessages[]
+  createdAt          DateTime        @default(now())
+  coupon             Coupon?
+  couponOrders       Order[]         @relation("coupon")
+  couponTransactions Transaction[]   @relation("coupon")
+  transactions       Transaction[]   @relation("author")
+  orders             Order[]         @relation("author")
+  withdraws          Withdraw[]
+}
+
+enum Plan {
+  FREE
+  PREMIUM
+  BUSINESS
+}
+
+model Coupon {
+  id           Int      @id @default(autoincrement())
+  unique       String   @unique @default(uuid())
+  percentage   Int      @default(35)
+  partner      Int      @default(15)
+  client       Int      @default(20)
+  status       Boolean  @default(true)
+  global       Boolean  @default(false)
+  custom       Boolean  @default(false)
+  authorUnique String   @unique
+  author       User?    @relation(fields: [authorUnique], references: [unique])
+  createdAt    DateTime @default(now())
+}
+
+model Order {
+  // id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  id                   Int      @id @default(autoincrement())
+  unique               String   @unique @default(uuid())
+  status               Status   @default(Pending)
+  invoice              String   @unique
+  product              String
+  design               String?
+  front                String?
+  back                 String?
+  amount               Int
+  accountNumber        String
+  method               String
+  name                 String
+  phone                String
+  address              String
+  screenshot           String   @default("/default/screenshot.png")
+  trxID                String?
+  text                 String?
+  couponName           String?
+  couponPercentage     Int      @default(0)
+  couponPartner        Int      @default(0)
+  couponClient         Int      @default(0)
+  couponProviderUnique String?
+  couponProvider       User?    @relation("coupon", fields: [couponProviderUnique], references: [unique])
+  authorUnique         String?
+  author               User?    @relation("author", fields: [authorUnique], references: [unique])
+  updatedAt            DateTime @updatedAt
+  createdAt            DateTime @default(now())
+}
+
+enum Status {
+  Pending
+  Processing
+  Shipping
+  Delivered
+  Rejected
+  Hold
+  Canceled
+}
+
+model Transaction {
+  // id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  id                   Int               @id @default(autoincrement())
+  unique               String            @unique @default(uuid())
+  accountNumber        String
+  plan                 Plan              @default(FREE)
+  quantity             Int               @default(0)
+  extend               Boolean           @default(false)
+  amount               Int
+  method               String
+  name                 String
+  phone                String
+  address              String
+  screenshot           String            @default("/default/screenshot.png")
+  product              String?
+  trxID                String?
+  status               TransactionStatus @default(Pending)
+  invoice              String            @unique
+  couponName           String?
+  couponPercentage     Int               @default(0)
+  couponPartner        Int               @default(0)
+  couponClient         Int               @default(0)
+  couponProviderUnique String?
+  couponProvider       User?             @relation("coupon", fields: [couponProviderUnique], references: [unique])
+  authorUnique         String
+  author               User              @relation("author", fields: [authorUnique], references: [unique])
+  updatedAt            DateTime          @updatedAt
+  createdAt            DateTime          @default(now())
+}
+
+enum TransactionStatus {
+  Pending
+  Approved
+  Rejected
+}
+
+model Withdraw {
+  // id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  id           Int            @id @default(autoincrement())
+  unique       String         @default(uuid())
+  amount       Int
+  status       WithdrawStatus @default(Pending)
+  method       String
+  account      String
+  message      String?
+  authorUnique String
+  author       User           @relation(fields: [authorUnique], references: [unique])
+  updatedAt    DateTime       @updatedAt
+  createdAt    DateTime       @default(now())
+}
+
+enum WithdrawStatus {
+  Pending
+  Approved
+  Rejected
+}
+
+model Contact {
+  // id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        Int      @id @default(autoincrement())
+  unique    String   @unique @default(uuid())
+  name      String
+  number    String
+  email     String
+  subject   String
+  message   String
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model AdminMessages {
+  // id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id           Int      @id @default(autoincrement())
+  unique       String   @unique @default(uuid())
+  name         String
+  number       String
+  message      String
+  read         Boolean  @default(false)
+  authorUnique String
+  author       User     @relation(fields: [authorUnique], references: [unique])
+  createdAt    DateTime @default(now())
+}
+
+model Message {
+  // id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id           Int      @id @default(autoincrement())
+  unique       String   @unique @default(uuid())
+  name         String
+  number       String
+  message      String
+  read         Boolean  @default(false)
+  authorUnique String
+  author       User     @relation(fields: [authorUnique], references: [unique])
+  createdAt    DateTime @default(now())
+}
+
+model Profile {
+  // id           String       @id @default(auto()) @map("_id") @db.ObjectId
+  id           Int          @id @default(autoincrement())
+  unique       String       @unique @default(uuid())
+  link         String       @unique()
+  cover        String       @default("/default/cover.png")
+  avatar       String       @default("/default/profile.png")
+  youtube      String?
+  delete       Boolean      @default(false)
+  website      String?
+  name         String
+  phone        String?
+  bio          String?
+  company      String?
+  companyphone String?
+  companyemail String?
+  designation  String?
+  corporate    String?
+  branch       String?
+  email        String?
+  address      String?
+  groupName    String?
+  groupItems   GroupItem[]
+  profession   String?
+  qr           String       @default("/default/qr.gif") @db.LongText
+  socials      Social[]
+  products     Product[]
+  services     Service[]
+  albums       Albums[]
+  localBanks   LocalBank[]
+  mobileBanks  MobileBank[]
+  globalBanks  GlobalBank[]
+  authorUnique String
+  author       User         @relation(fields: [authorUnique], references: [unique])
+  updatedAt    DateTime     @updatedAt
+  createdAt    DateTime     @default(now())
+}
+
+model GroupItem {
+  // id            String  @id @default(auto()) @map("_id") @db.ObjectId
+  id            Int     @id @default(autoincrement())
+  unique        String  @unique @default(uuid())
+  title         String?
+  value         String?
+  profileUnique String
+  profile       Profile @relation(fields: [profileUnique], references: [unique])
+}
+
+model Social {
+  // id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  id           Int     @id @default(autoincrement())
+  unique       String  @unique @default(uuid())
+  type         Boolean @default(true)
+  logo         String  @default("bi bi-circle")
+  link         String  @default("/")
+  title        String  @default("Unknown")
+  authorUnique String
+  author       Profile @relation(fields: [authorUnique], references: [unique])
+}
+
+model Product {
+  // id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  id           Int     @id @default(autoincrement())
+  unique       String  @unique @default(uuid())
+  image        String  @default("/default/product.png")
+  title        String
+  message      String?
+  price        String?
+  authorUnique String
+  author       Profile @relation(fields: [authorUnique], references: [unique])
+}
+
+model Service {
+  // id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  id           Int     @id @default(autoincrement())
+  unique       String  @unique @default(uuid())
+  image        String  @default("/default/service.png")
+  title        String
+  message      String?
+  price        String?
+  authorUnique String
+  author       Profile @relation(fields: [authorUnique], references: [unique])
+}
+
+model Albums {
+  // id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  id           Int     @id @default(autoincrement())
+  unique       String  @unique @default(uuid())
+  image        String
+  authorUnique String
+  author       Profile @relation(fields: [authorUnique], references: [unique])
+}
+
+model LocalBank {
+  // id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  id           Int     @id @default(autoincrement())
+  unique       String  @unique @default(uuid())
+  logo         String  @default("/default/bank.png")
+  bank         String
+  name         String
+  number       String
+  branch       String
+  authorUnique String
+  author       Profile @relation(fields: [authorUnique], references: [unique])
+}
+
+model MobileBank {
+  // id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  id           Int     @id @default(autoincrement())
+  unique       String  @unique @default(uuid())
+  logo         String  @default("/default/bank.png")
+  name         String
+  type         String  @default("Personal")
+  number       String
+  authorUnique String
+  author       Profile @relation(fields: [authorUnique], references: [unique])
+}
+
+model GlobalBank {
+  // id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  id           Int     @id @default(autoincrement())
+  unique       String  @unique @default(uuid())
+  logo         String  @default("/default/bank.png")
+  bank         String
+  lineOne      String
+  lineTwo      String  @default("-")
+  lineThree    String  @default("-")
+  authorUnique String
+  author       Profile @relation(fields: [authorUnique], references: [unique])
+}
+
+model ShopProduct {
+  // id          String             @id @default(auto()) @map("_id") @db.ObjectId
+  id          Int                @id @default(autoincrement())
+  unique      String             @unique @default(uuid())
+  path        String             @unique
+  images      ShopProductImage[]
+  title       String
+  description String?
+  currency    String             @default("USD")
+  price       Int
+  discount    Int?
+  fee         Int                @default(0)
+  video       String?
+}
+
+model ShopProductImage {
+  // id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  id          Int          @id @default(autoincrement())
+  image       String
+  unique      String
+  shopProduct ShopProduct? @relation(fields: [unique], references: [unique])
+}

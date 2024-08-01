@@ -1,0 +1,17 @@
+[
+    {
+        "images": ["/products/default.png", "/products/default2.jpg"],
+        "title": "NFC Business Card Premium",
+        "category": "NFC3"
+    },
+    {
+        "images": ["/products/default.png", "/products/default2.jpg"],
+        "title": "NFC Business Card Gold",
+        "category": "NFC3"
+    },
+    {
+        "images": ["/products/default.png", "/products/default2.jpg"],
+        "title": "NFC Business Card Diamond",
+        "category": "NFC3"
+    }
+]

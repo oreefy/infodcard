@@ -1,0 +1,31 @@
+{
+    "PREMIUM": {
+        "plan": "Premium",
+        "price": 1500,
+        "regular": 1800,
+        "currency": "Tk"
+    },
+    "PREMIUM_TO_BUSINESS": {
+        "plan": "Business",
+        "price": 1000,
+        "currency": "Tk"
+    },
+    "EXTEND": {
+        "plan": "Business",
+        "price": 750,
+        "currency": "Tk"
+    },
+    "BUSINESS": {
+        "plan": "Business",
+        "price": 2500,
+        "regular": 2700,
+        "currency": "Tk"
+    },
+    "FREE": {
+        "plan": "Free",
+        "price": 0.00,
+        "regular": 0.00,
+        "currency": "Tk"
+    }
+
+}

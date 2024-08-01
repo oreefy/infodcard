@@ -1,0 +1,17 @@
+[
+    {
+        "title": "NFC Business Card",
+        "currency": "Tk",
+        "price": 400
+    },
+    {
+        "title": "Pendrive NFC Card",
+        "currency": "Tk",
+        "price": 600
+    },
+    {
+        "title": "NFC Sticker",
+        "currency": "Tk",
+        "price": 200
+    }
+]

@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /my-account/
+Disallow: /p/
+
+Sitemap: https://www.infodcard.com/sitemap.xml

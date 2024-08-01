@@ -1,0 +1,35 @@
+[
+    {
+        "path": "business-nfc-card",
+        "title": "NFC Business Card",
+        "images": ["/products/default.png", "/products/default2.jpg"],
+        "description": "Product description",
+        "currency": "Tk",
+        "price": 600,
+        "discount": 800,
+        "category": "NFC3",
+        "custom": true
+    },
+    {
+        "path": "pendrive-nfc-card",
+        "title": "NFC Pendrive Business Card",
+        "images": ["/products/default.png", "/products/default2.jpg"],
+        "description": "",
+        "currency": "Tk",
+        "price": 2000,
+        "discount": 2200,
+        "category": "NFC3",
+        "custom": false
+    },
+    {
+        "path": "nfc-sticker",
+        "title": "NFC Sticker",
+        "images": ["/products/default.png", "/products/default2.jpg"],
+        "description": "",
+        "currency": "Tk",
+        "price": 300,
+        "discount": 400,
+        "category": "NFC3",
+        "custom": false
+    }
+]

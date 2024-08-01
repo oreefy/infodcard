@@ -1,0 +1,32 @@
+[
+    {
+        "logo":"/default/bkash.png",
+        "provider": "bKash (Personal)",
+        "number": "01714253811"
+    },
+    {
+        "logo":"/default/bkash.png",
+        "provider": "bKash (Marchant)",
+        "number": "01912662277"
+    },
+    {
+        "logo":"/default/nagad.png",
+        "provider": "Nagad (Personal)",
+        "number": "01714253811"
+    },
+    {
+        "logo":"/default/web-money.png",
+        "provider": "WebMoney (USD)",
+        "number": "Z377902230584"
+    },
+    {
+        "logo":"/default/perfect-money.png",
+        "provider": "Perfect Money (USD)",
+        "number": "U4660236"
+    },
+    {
+        "logo":"/default/offline-gateway.png",
+        "provider": "Cash on Delivery",
+        "number": ""
+    }
+]
