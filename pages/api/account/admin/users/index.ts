@@ -5,9 +5,10 @@ import { UserModel } from '@/models';
 
 export default async function UsersApi(req: NextApiRequest, res: NextApiResponse) {
     try {
+        const body = JSON.parse(req.body);
         const user = await Admin(req, res);
         if (user) {
-            const users = await UserModel.find.many("user.unique user.email user.plan user.phone user.code user.ads user.password user.profileLength user.createdAt user.profile user.messages user.adminMessages user.orders user.coupon user.couponOrders user.transactions user.couponTransactions user.withdraws");
+            const users = await UserModel.find.many({ plan: body.plan || "", fields: "user.unique user.email user.plan user.phone user.code user.ads user.profileLength user.createdAt" });
             Response(res, { users: users }, 200);
         }
     } catch (error: any) { await Response(res, { message: error.message }, 500); }

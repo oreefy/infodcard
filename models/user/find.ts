@@ -1,12 +1,17 @@
 import { prisma } from "@/db-config";
-import {UserReturn, UserReturns, UserType, UserSelect } from '@/models/user/type';
+import { UserReturn, UserReturns, UserType, UserSelect } from '@/models/user/type';
 import { Console } from "@/middleware/http";
 import { Sanitizer } from 'primepack';
 
-export async function FindMany(fields?: string): Promise<UserType[]> {
+export async function FindMany(options?: { plan: "FREE" | "PREMIUM" | "BUSINESS", fields?: string }): Promise<UserType[]> {
     try {
-        const users = await prisma.user.findMany({ select: UserSelect(fields) });
-        return UserReturns(users, fields);
+        const users = await prisma.user.findMany({
+            where: {
+                plan: options?.plan || undefined,
+            },
+            select: UserSelect(options?.fields)
+        });
+        return UserReturns(users, options?.fields);
     } catch (error: any) {
         Console(error.message);
         return [];

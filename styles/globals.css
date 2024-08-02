@@ -3,6 +3,24 @@
 @tailwind utilities;
 
 @layer components {
+  .table-box {
+    @apply bg-red-200 w-full overflow-auto bg-white/20 rounded-xl;
+  }
+  .table-box table {
+    @apply table table-auto w-full;
+  }
+  .table-box table thead tr {
+    @apply bg-white/50;
+  }
+  .table-box table thead tr th {
+    @apply px-3 py-3 text-start;
+  }
+  .table-box table tbody tr {
+    @apply hover:bg-white/20;
+  }
+  .table-box table tbody tr td {
+    @apply px-3 py-1 text-start;
+  }
   .box {
     @apply bg-white/50 p-5 rounded-xl mb-5;
   }
