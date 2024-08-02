@@ -9,6 +9,9 @@ export async function FindMany(options?: { plan: "FREE" | "PREMIUM" | "BUSINESS"
             where: {
                 plan: options?.plan || undefined,
             },
+            orderBy: {
+                createdAt: "desc"
+            },
             select: UserSelect(options?.fields)
         });
         return UserReturns(users, options?.fields);
