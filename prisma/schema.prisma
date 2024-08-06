@@ -132,7 +132,7 @@ enum TransactionStatus {
 model Withdraw {
   // id            String   @id @default(auto()) @map("_id") @db.ObjectId
   id           Int            @id @default(autoincrement())
-  unique       String         @default(uuid())
+  unique       String         @unique @default(uuid())
   amount       Int
   status       WithdrawStatus @default(Pending)
   method       String
