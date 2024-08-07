@@ -4,6 +4,23 @@ import { OrderReturn, OrderReturns, OrderSelect, OrderType } from "@/models/orde
 import { Console } from "@/middleware/http";
 import { UserModel } from "@/models";
 
+export async function FindMany(options?: { status: "Pending" | "Processing" | "Shipping" | "Delivered" | "Rejected" | "Hold" | "Canceled", fields?: string }): Promise<OrderType[]> {
+    try {
+        const orders = await prisma.order.findMany({
+            where: {
+                status: options?.status || undefined,
+            },
+            orderBy: {
+                createdAt: "desc"
+            },
+            select: OrderSelect(options?.fields)
+        });
+        return OrderReturns(orders, options?.fields);
+    } catch (error: any) {
+        Console(error.message);
+        return [];
+    }
+}
 export async function FindUnique(identifier: string, fields?: string): Promise<OrderType | null> {
     try {
         let find = await prisma.order.findUnique({

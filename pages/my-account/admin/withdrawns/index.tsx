@@ -42,9 +42,9 @@ export default function Withdrawns() {
             <Seo title="Withdrawns" />
             <Layout>
                 <div className="box">
-                    <div className="mb-3 grid grid-cols-2 gap-3">
+                    <div className="mb-3 grid grid-cols-2 gap-3 items-center">
                         <div>
-                            <h1 className="text-3xl font-bold">Withdrawns</h1>
+                            <h1 className="text-xl md:text-3xl font-bold break-words">Withdrawns</h1>
                         </div>
                         <div>
                             <select disabled={loader} value={select} onChange={(e) => { setSelect(e.target.value) }} className="inp-text" title="Select Options">
@@ -79,10 +79,14 @@ export default function Withdrawns() {
                                         <td>{item?.method}</td>
                                         <td>{item?.message}</td>
                                         <td className="flex gap-1.5">
-                                            <button type="button" onClick={() => update(item?.unique!, "Pending")} disabled={updateLoader} className={`rounded-full ${item?.status === "Pending" ? "bg-orange-200 hover:bg-orange-600 hover:text-white" : "link"} active:scale-75 duration-200 px-1.5 py-0.5`} title="Pending"><i className="bi bi-clock"></i></button>
-                                            <button type="button" onClick={() => update(item?.unique!, "Approved")} disabled={updateLoader} className={`rounded-full ${item?.status === "Approved" ? "bg-green-200 hover:bg-green-600 hover:text-white" : "link"} active:scale-75 duration-200 px-1.5 py-0.5`} title="Approve"><i className="bi bi-check-lg"></i></button>
-                                            <button type="button" onClick={() => update(item?.unique!, "Rejected")} disabled={updateLoader} className={`rounded-full ${item?.status === "Rejected" ? "bg-red-200 hover:bg-red-600 hover:text-white" : "link"} active:scale-75 duration-200 px-1.5 py-0.5`} title="Reject"><i className="bi bi-x-lg"></i></button>
-                                            <Link className="link" href={"/my-account/admin/users/" + item.unique}>History</Link>
+                                            {updateLoader ? <>
+                                                <p>Please Wait...</p>
+                                            </> : <>
+                                                <button type="button" onClick={() => update(item?.unique!, "Pending")} disabled={updateLoader} className={`rounded-full ${item?.status === "Pending" ? "bg-orange-200 hover:bg-orange-600 hover:text-white" : "link"} active:scale-75 duration-200 px-1.5 py-0.5`} title="Pending"><i className="bi bi-clock"></i></button>
+                                                <button type="button" onClick={() => update(item?.unique!, "Approved")} disabled={updateLoader} className={`rounded-full ${item?.status === "Approved" ? "bg-green-200 hover:bg-green-600 hover:text-white" : "link"} active:scale-75 duration-200 px-1.5 py-0.5`} title="Approve"><i className="bi bi-check-lg"></i></button>
+                                                <button type="button" onClick={() => update(item?.unique!, "Rejected")} disabled={updateLoader} className={`rounded-full ${item?.status === "Rejected" ? "bg-red-200 hover:bg-red-600 hover:text-white" : "link"} active:scale-75 duration-200 px-1.5 py-0.5`} title="Reject"><i className="bi bi-x-lg"></i></button>
+                                            </>}
+                                            <Link className="link" href={"/my-account/admin/users/" + item.authorUnique}>History</Link>
                                         </td>
                                     </tr>
                                 })}
