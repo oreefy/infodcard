@@ -5,16 +5,16 @@ import Fetch from "@/fetch";
 import { toast } from "react-toastify";
 import Link from "next/link";
 
-function StatusUpdate({ unique, status }: { unique: string; status: "Pending" | "Processing" | "Shipping" | "Delivered" | "Rejected" | "Hold" | "Canceled" }) {
+function StatusUpdate({ unique, status }: { unique: string; status: "Pending" | "Approved" | "Rejected" }) {
     const [loader, setLoader] = useState<boolean>(false);
-    const [select, setSelect] = useState<"Pending" | "Processing" | "Shipping" | "Delivered" | "Rejected" | "Hold" | "Canceled">(status);
-    const onChange = async (value: "Pending" | "Processing" | "Shipping" | "Delivered" | "Rejected" | "Hold" | "Canceled") => {
+    const [select, setSelect] = useState<"Pending" | "Approved" | "Rejected">(status);
+    const onChange = async (value: "Pending" | "Approved" | "Rejected") => {
         setSelect(value);
         await update(unique, value);
     }
-    const update = async (identifier: string, status: "Pending" | "Processing" | "Shipping" | "Delivered" | "Rejected" | "Hold" | "Canceled") => {
+    const update = async (identifier: string, status: "Pending" | "Approved" | "Rejected") => {
         setLoader(true);
-        const res = await Fetch("/api/account/admin/orders/update", { method: "POST", body: { unique: identifier, status: status } });
+        const res = await Fetch("/api/account/admin/upgrades/update", { method: "POST", body: { unique: identifier, status: status } });
         if (res.status === 200) {
             toast.success(res.body.message || "Something went wrong.");
         } else {
@@ -26,24 +26,20 @@ function StatusUpdate({ unique, status }: { unique: string; status: "Pending" | 
         <>
             <select disabled={loader} value={select} onChange={(e) => { onChange(e.target.value as any) }} className="inp-text" title="Select Options">
                 <option value="Pending">Pending</option>
-                <option value="Processing">Processing</option>
-                <option value="Shipping">Shipping</option>
-                <option value="Delivered">Delivered</option>
+                <option value="Approved">Approved</option>
                 <option value="Rejected">Rejected</option>
-                <option value="Hold">Hold</option>
-                <option value="Canceled">Canceled</option>
             </select>
         </>
     )
 }
 
-export default function Orders() {
+export default function Upgrades() {
     const [loader, setLoader] = useState(true);
     const [data, setData] = useState<any[]>([]);
-    const [select, setSelect] = useState<string>("");
+    const [select, setSelect] = useState<string>("Pending");
     const loadData = async (status?: string) => {
         setLoader(true);
-        const res = await Fetch("/api/account/admin/orders", { method: "POST", body: { status } });
+        const res = await Fetch("/api/account/admin/upgrades", { method: "POST", body: { status } });
         if (res.status === 200) {
             setData(res.body.data);
             setLoader(false);
@@ -59,23 +55,19 @@ export default function Orders() {
     }, [select]);
     return (
         <>
-            <Seo title="Orders" />
+            <Seo title="Upgrades" />
             <Layout>
                 <div className="box">
                     <div className="mb-3 grid grid-cols-2 gap-3 items-center">
                         <div>
-                            <h1 className="text-xl md:text-3xl font-bold break-words">Orders</h1>
+                            <h1 className="text-xl md:text-3xl font-bold break-words">Upgrades</h1>
                         </div>
                         <div>
                             <select disabled={loader} value={select} onChange={(e) => { setSelect(e.target.value) }} className="inp-text" title="Select Options">
                                 <option selected value="">All</option>
                                 <option value="Pending">Pending</option>
-                                <option value="Processing">Processing</option>
-                                <option value="Shipping">Shipping</option>
-                                <option value="Delivered">Delivered</option>
+                                <option value="Approved">Approved</option>
                                 <option value="Rejected">Rejected</option>
-                                <option value="Hold">Hold</option>
-                                <option value="Canceled">Canceled</option>
                             </select>
                         </div>
                     </div>
@@ -86,6 +78,7 @@ export default function Orders() {
                                 <tr>
                                     <th className="min-w-40">Joined</th>
                                     <th className="min-w-40">Status</th>
+                                    <th className="min-w-40">Upgrade</th>
                                     <th className="min-w-28">Amount</th>
                                     <th className="min-w-32">Invoice</th>
                                     <th className="min-w-64">Product Title</th>
@@ -100,6 +93,7 @@ export default function Orders() {
                                     return <tr key={index}>
                                         <td>{`${new Date(item?.createdAt).toDateString()}`}</td>
                                         <td><StatusUpdate unique={item?.unique || ""} status={item?.status || "Pending"} /></td>
+                                        <td>{item?.plan}{item.extend ? " (" + item.quantity + ")" : ""}</td>
                                         <td>{(item?.amount || 0) + "/" + ((item?.amount || 0) - (((item?.couponClient || 0) / 100) * (item?.amount || 0)))}</td>
                                         <td>{item?.invoice}</td>
                                         <td>{item?.product}</td>
@@ -107,7 +101,7 @@ export default function Orders() {
                                         <td>{item?.method}</td>
                                         <td>{item?.trxID}</td>
                                         <td className="flex gap-1.5">
-                                            <Link className="link" href={"/my-account/admin/orders/" + item.unique}>Details</Link>
+                                            <Link className="link" href={"/my-account/admin/upgrades/" + item.unique}>Details</Link>
                                         </td>
                                     </tr>
                                 })}

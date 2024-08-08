@@ -22,6 +22,18 @@ export async function FindUnique(identifier: string, fields?: string): Promise<T
         return null;
     }
 }
+export async function FindMany(options: { fields?: string, status: "Pending" | "Approved" | "Rejected" }): Promise<TransactionType[]> {
+    try {
+        const transactions = await prisma.transaction.findMany({
+            where: { status: options?.status || undefined },
+            select: TransactionSelect(options.fields),
+        });
+        return TransactionReturns(transactions, options.fields);
+    } catch (error: any) {
+        Console(error.message);
+        return [];
+    }
+}
 export async function FindAll(fields?: string): Promise<TransactionType[]> {
     try {
         const transactions = await prisma.transaction.findMany({
