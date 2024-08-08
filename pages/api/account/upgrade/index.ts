@@ -27,7 +27,7 @@ export default async function AccountUpgradeApi(req: NextApiRequest, res: NextAp
                 }
             }            
             if (!(await TransactionModel.checkStatus(user.email, body.plan))) {
-                const update = await TransactionModel.update(user.email, data);
+                const update = await TransactionModel.create(user.email, data);
                 if (update) {
                     Response(res, { message: "Your upgrade plan has been successfully submitted." }, 200);
                 } else {
