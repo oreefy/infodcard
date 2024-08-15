@@ -79,6 +79,20 @@ export default function ShopProduct() {
             setCouponLoader(false);
         }
     }
+    useEffect(() => {
+        if (router.query.reference) {
+            setCouponLoader(true);
+            Fetch("/api/account/coupon/match", { method: "POST", body: { code: router.query.reference } }).then((res)=>{
+                if (res.status === 200) {
+                    setDiscount({ coupon: res.body.code, percentage: res.body.client });
+                    setCouponLoader(false);
+                } else {
+                    setDiscount(null);
+                    setCouponLoader(false);
+                }
+            });
+        }
+    }, [router.query.reference])
     const confirm = async (event: any) => {
         event.preventDefault();
         setConfirmLoader(true);

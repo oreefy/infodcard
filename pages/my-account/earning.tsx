@@ -19,7 +19,7 @@ export default function Earning() {
     const LoadData = async () => {
         setLoader(true);
         const res = await Fetch("/api/account/earning", { method: "POST" });
-        if (res.status === 200) {            
+        if (res.status === 200) {
             setEarning(res.body.earning);
             setCoupon(res.body.coupon.code);
             setShare(res.body.coupon.client);
@@ -239,6 +239,12 @@ export default function Earning() {
                                 <button disabled={couponLoader} className="w-full bg-green-600 hover:bg-green-800 px-6 py-2 flex items-center justify-center rounded-lg duration-200 active:scale-95 text-white" type="submit">{couponLoader ? "Please wait..." : "Update"}</button>
                             </div>
                         </form>
+                        <div className="box my-3">
+                            <p className=''>https://www.infodcard.com/shop/business-nfc-card?reference={coupon}</p>
+                        </div>
+                        <div className="box mb-0">
+                            <p>{`<a href="https://www.infodcard.com/shop/business-nfc-card?reference=${coupon}"><img src="https://www.infodcard.com/default/account.png" width="100%" height="100%" alt="www.infodcard.com"/></a>`}</p>
+                        </div>
                     </div>
                 </div>}
             </Layout>
