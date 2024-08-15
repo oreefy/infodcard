@@ -15,9 +15,9 @@ export function ContactSelect(fields?: string) {
         name: true,
         subject: true,
         message: true,
-        number: fields?.includes("coupon.number"),
-        read: fields?.includes("coupon.read"),
-        createdAt: fields?.includes("coupon.createdAt"),
+        number: fields?.includes("contact.number"),
+        read: fields?.includes("contact.read"),
+        createdAt: fields?.includes("contact.createdAt"),
     }
 }
 export function ContactReturn(contact: ContactType, fields?: string) {

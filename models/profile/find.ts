@@ -4,6 +4,19 @@ import { ProfileType, ProfileSelect, ProfileReturn, ProfileReturns } from '@/mod
 import { Sanitizer } from "primepack";
 import { UserModel } from "@/models";
 
+export async function FindMany(options?: { fields?: string }): Promise<ProfileType[]> {
+    try {
+        let find: ProfileType[] = [];
+        find = await prisma.profile.findMany({
+            orderBy: { createdAt: "desc" },
+            select: ProfileSelect(options?.fields)
+        });
+        return ProfileReturns(find, options?.fields);
+    } catch (error: any) {
+        Console(error.message);
+        return [];
+    }
+}
 export async function FindUnique(identifier: string, fields?: string): Promise<ProfileType | null> {
     try {
         let find: ProfileType | null = null;

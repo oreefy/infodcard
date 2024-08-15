@@ -1,6 +1,6 @@
 import { prisma } from "@/db-config";
 import { Console } from "@/middleware/http";
-import { CouponType, CouponSelect, CouponReturn } from '@/models/coupon/type';
+import { CouponType, CouponSelect, CouponReturn, CouponReturns } from '@/models/coupon/type';
 import { UserType, UserSelect } from '@/models/user/type';
 import { Sanitizer } from "primepack";
 import { CouponModel, OrderModel, TransactionModel, UserModel, WithdrawModel } from "@/models";
@@ -102,6 +102,21 @@ export async function FindUnique(identifier: string, fields?: string): Promise<C
     } catch (error: any) {
         Console(error.message);
         return null;
+    }
+}
+export async function FindMany(options: { status?: boolean, global?: boolean; custom?: boolean; fields?: string }): Promise<CouponType[]> {
+    try {
+        const coupons: CouponType[] = await prisma.user.findMany({
+            select: CouponSelect(options.fields),
+        });
+        if (coupons && coupons.length) {
+            return coupons ? CouponReturns(coupons,options.fields) : [];
+        } else {
+            return []
+        }
+    } catch (error: any) {
+        Console(error.message);
+        return [];
     }
 }
 export async function GlobalCoupon(fields?: string): Promise<CouponType | null> {

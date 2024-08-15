@@ -4,6 +4,18 @@ import { AdminMessageType, AdminMessageReturn, AdminMessageSelect, AdminMessageR
 import { Sanitizer } from 'primepack';
 import { UserModel } from '@/models';
 
+export async function FindMany(options?: { fields?: string }): Promise<AdminMessageType[]> {
+    try {
+        const messages = await prisma.adminMessages.findMany({
+            select: AdminMessageSelect(options?.fields),
+        });
+        return messages ? AdminMessageReturns(messages, options?.fields) : [];
+    } catch (error: any) {
+        Console(error.message);
+        return [];
+    }
+}
+
 export async function FindUnique(unique: string, fields?: string): Promise<AdminMessageType | null> {
     try {
         const message = await prisma.adminMessages.findUnique({

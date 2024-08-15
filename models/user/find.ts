@@ -3,7 +3,7 @@ import { UserReturn, UserReturns, UserType, UserSelect } from '@/models/user/typ
 import { Console } from "@/middleware/http";
 import { Sanitizer } from 'primepack';
 
-export async function FindMany(options?: { plan: "FREE" | "PREMIUM" | "BUSINESS", fields?: string }): Promise<UserType[]> {
+export async function FindMany(options?: { plan?: "FREE" | "PREMIUM" | "BUSINESS", fields?: string }): Promise<UserType[]> {
     try {
         const users = await prisma.user.findMany({
             where: {
