@@ -16,7 +16,7 @@ import { useState } from "react";
 import Fetch from '@/fetch'
 
 export async function getServerSideProps(context: any) {
-    const response = await Fetch("/api/account/profile", { method: "POST", body: context.query, });
+    const response = await Fetch("/api/profile", { method: "POST", body: context.query, });
     switch (response.status) {
         case 200:
             return { props: { response: response.body } }

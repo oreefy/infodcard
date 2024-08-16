@@ -3,8 +3,11 @@ import Seo from '@/components/seo';
 import Fetch from '@/fetch';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import database from '@/database';
 
 export default function Earning() {
+    const products = database.products;
+    const [selectedProduct, setSelectedProduct] = useState<string>(products[0].path || "");
     const [loader, setLoader] = useState<boolean>(true);
     const [coupon, setCoupon] = useState<string>("");
     const [percentence, setPercentence] = useState<number>(0);
@@ -91,6 +94,10 @@ export default function Earning() {
             toast.error("You don't have Insufficient fund.");
             setWithdrawRequestLoader(false);
         }
+    }
+    const copy = (url: string) => {
+        navigator.clipboard.writeText(url);
+        toast.success("Successfully copied.");
     }
     return (
         <>
@@ -239,11 +246,32 @@ export default function Earning() {
                                 <button disabled={couponLoader} className="w-full bg-green-600 hover:bg-green-800 px-6 py-2 flex items-center justify-center rounded-lg duration-200 active:scale-95 text-white" type="submit">{couponLoader ? "Please wait..." : "Update"}</button>
                             </div>
                         </form>
-                        <div className="box my-3">
-                            <p className=''>https://www.infodcard.com/shop/business-nfc-card?reference={coupon}</p>
-                        </div>
-                        <div className="box mb-0">
-                            <p>{`<a href="https://www.infodcard.com/shop/business-nfc-card?reference=${coupon}"><img src="https://www.infodcard.com/default/account.png" width="100%" height="100%" alt="www.infodcard.com"/></a>`}</p>
+                        <div className="box my-3 grid grdi-cols-1 gap-3">
+                            <div>
+                                <select value={selectedProduct} className='inp-text' title='Select Product' onChange={(event) => { setSelectedProduct(event.target.value) }}>
+                                    <option>Select Product</option>
+                                    {products.map((item, index) => {
+                                        return (<option key={index} value={item.path}>{item.title}</option>)
+                                    })}
+                                </select>
+                            </div>
+                            <div>
+                                <div>
+                                    <button onClick={() => copy(`https://www.infodcard.com/shop/${selectedProduct}?reference=${coupon}`)} className='px-3 shrink-0 py-1 rounded-md bg-white/50 active:scale-75 hover:bg-white duration-200 float-right' type='button'>Copy</button>
+                                </div>
+                                <div className="col-span-3">
+                                    <p className='break-words rounded-md px-3 py-2'>{`https://www.infodcard.com/shop/${selectedProduct}?reference=${coupon}`}</p>
+                                </div>
+                            </div>
+                            <hr className='border-black/30 border-2' />
+                            <div>
+                                <div>
+                                    <button onClick={() => copy(`<a href="https://www.infodcard.com/shop/${selectedProduct}?reference=${coupon}"><img src="https://www.infodcard.com/default/account.png" width="100%" height="100%" alt="www.infodcard.com"/></a>`)} className='px-3 shrink-0 py-1 rounded-md bg-white/50 active:scale-75 hover:bg-white duration-200 float-right' type='button'>Copy</button>
+                                </div>
+                                <div className="col-span-3">
+                                    <p className='break-words rounded-md px-3 py-2'>{`<a href="https://www.infodcard.com/shop/${selectedProduct}?reference=${coupon}"><img src="https://www.infodcard.com/default/account.png" width="100%" height="100%" alt="www.infodcard.com"/></a>`}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>}

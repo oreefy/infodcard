@@ -114,6 +114,7 @@ CREATE TABLE `Withdraw` (
     `updatedAt` DATETIME(3) NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
+    UNIQUE INDEX `Withdraw_unique_key`(`unique`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -168,6 +169,7 @@ CREATE TABLE `Profile` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `unique` VARCHAR(191) NOT NULL,
     `link` VARCHAR(191) NOT NULL,
+    `visitor` INTEGER NOT NULL DEFAULT 0,
     `cover` VARCHAR(191) NOT NULL DEFAULT '/default/cover.png',
     `avatar` VARCHAR(191) NOT NULL DEFAULT '/default/profile.png',
     `youtube` VARCHAR(191) NULL,

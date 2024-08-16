@@ -67,3 +67,24 @@ export async function Update(data: ProfileUpdateType, fields?: string): Promise<
         return null;
     }
 }
+export async function Visitor(identifier: string): Promise<boolean> {
+    try {
+        const find = await ProfileModel.find.unique(identifier, "profile.visitor");
+        if (find) {
+            if (await prisma.profile.update({
+                where: { unique: find.unique },
+                data: { visitor: (find.visitor || 0) + 1 },
+                select: { unique: true }
+            })) {
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    } catch (error: any) {
+        Console(error.message);
+        return false;
+    }
+}

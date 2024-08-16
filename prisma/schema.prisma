@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client-js"
-  // output   = "../.prisma"
+  // output   = "../.db-config"
 }
 
 datasource db {
@@ -194,6 +194,7 @@ model Profile {
   id           Int          @id @default(autoincrement())
   unique       String       @unique @default(uuid())
   link         String       @unique()
+  visitor      Int          @default(0)
   cover        String       @default("/default/cover.png")
   avatar       String       @default("/default/profile.png")
   youtube      String?

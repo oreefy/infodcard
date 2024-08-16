@@ -11,6 +11,7 @@ export interface ProfileType {
     unique: string;
     link: string;
     name: string;
+    visitor?: number;
     cover?: string;
     avatar?: string;
     youtube?: string | null;
@@ -47,6 +48,7 @@ export function ProfileSelect(fields?: string) {
         link: true,
         name: true,
         cover: fields?.includes("profile.cover"),
+        visitor: fields?.includes("profile.visitor"),
         avatar: fields?.includes("profile.avatar"),
         youtube: fields?.includes("profile.youtube"),
         delete: fields?.includes("profile.delete"),
@@ -82,6 +84,7 @@ export function ProfileReturn(profile: ProfileType, fields?: string) {
     response.unique = profile.unique;
     response.link = profile.link;
     response.name = profile.name;
+    if (fields?.includes("profile.visitor")) { response.visitor = profile.visitor }
     if (fields?.includes("profile.cover")) { response.cover = profile.cover }
     if (fields?.includes("profile.avatar")) { response.avatar = profile.avatar }
     if (fields?.includes("profile.youtube")) { response.youtube = profile.youtube }

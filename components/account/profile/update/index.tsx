@@ -47,6 +47,10 @@ export default function UpdateProfile({ profile }: { profile: any }) {
     return (
         <>
             <form onSubmit={update} className="grid grid-cols-2 gap-3">
+                <div className="box mb-0 col-span-2 flex justify-between items-center">
+                        <h4>Visitors</h4>
+                        <p>{profile.visitor || 0}</p>
+                </div>
                 <div className="col-span-2"><FileComponent plan={session?.user?.name as any} profile={profile} /></div>
                 <div className="col-span-2"><SocialsComponent plan={session?.user?.name as any} profile={profile} /></div>
                 <div className="col-span-2"><ProfileComponent plan={session?.user?.name as any} profile={profile} errors={errors} /></div>

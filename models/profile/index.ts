@@ -1,10 +1,11 @@
 import { Create } from '@/models/profile/create';
-import { Update } from '@/models/profile/update';
+import { Update, Visitor } from '@/models/profile/update';
 import { Delete } from '@/models/profile/delete';
 import { FindUnique, FindByAuthor, AuthorProfile, FindMany } from '@/models/profile/find';
 
 const ProfileModel = {
     create: Create,
+    addVisit: Visitor,
     find: {
         unique: FindUnique,
         many: FindMany,
