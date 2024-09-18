@@ -46,21 +46,23 @@ export default function UpdateProfile({ profile }: { profile: any }) {
     }
     return (
         <>
-            <form onSubmit={update} className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-3">
                 <div className="box mb-0 col-span-2 flex justify-between items-center">
-                        <h4>Visitors</h4>
-                        <p>{profile.visitor || 0}</p>
+                    <h4>Visitors</h4>
+                    <p>{profile.visitor || 0}</p>
                 </div>
                 <div className="col-span-2"><FileComponent plan={session?.user?.name as any} profile={profile} /></div>
-                <div className="col-span-2"><SocialsComponent plan={session?.user?.name as any} profile={profile} /></div>
-                <div className="col-span-2"><ProfileComponent plan={session?.user?.name as any} profile={profile} errors={errors} /></div>
-                <div className="col-span-2"><ContactComponent plan={session?.user?.name as any} profile={profile} errors={errors} /></div>
-                <div className="col-span-2"><CompanyComponent plan={session?.user?.name as any} profile={profile} errors={errors} /></div>
-                <div className="text-center col-span-2">
-                    {errors && errors.map((error, index) => { return error.type === "other" ? error.success ? <p className="mb-0.5 text-green-800 font-bold">{error.message}</p> : <p key={index} className="mb-0.5 text-red-800 font-bold" >{error.message}</p> : "" })}
-                    {loader ? <span className="w-28 px-10 py-2 bg-white/50 animate-pulse rounded-full inline-block">Wait...</span> : <button className="py-2 px-10 cursor-pointer active:scale-75 hover:px-16 duration-200 bg-green-600 hover:bg-green-900 rounded-full text-white font-bold disabled:bg-slate-700 disabled:hover:px-10 disabled:cursor-not-allowed" type="submit">Update</button>}
-                </div>
-            </form>
+                <form className='col-span-2 grid grid-cols-2 gap-3' onSubmit={update} >
+                    <div className="col-span-2"><SocialsComponent plan={session?.user?.name as any} profile={profile} /></div>
+                    <div className="col-span-2"><ProfileComponent plan={session?.user?.name as any} profile={profile} errors={errors} /></div>
+                    <div className="col-span-2"><ContactComponent plan={session?.user?.name as any} profile={profile} errors={errors} /></div>
+                    <div className="col-span-2"><CompanyComponent plan={session?.user?.name as any} profile={profile} errors={errors} /></div>
+                    <div className="text-center col-span-2">
+                        {errors && errors.map((error, index) => { return error.type === "other" ? error.success ? <p className="mb-0.5 text-green-800 font-bold">{error.message}</p> : <p key={index} className="mb-0.5 text-red-800 font-bold" >{error.message}</p> : "" })}
+                        {loader ? <span className="w-28 px-10 py-2 bg-white/50 animate-pulse rounded-full inline-block">Wait...</span> : <button className="py-2 px-10 cursor-pointer active:scale-75 hover:px-16 duration-200 bg-green-600 hover:bg-green-900 rounded-full text-white font-bold disabled:bg-slate-700 disabled:hover:px-10 disabled:cursor-not-allowed" type="submit">Update</button>}
+                    </div>
+                </form>
+            </div>
         </>
     );
 }

@@ -26,6 +26,7 @@ export async function FindMany(options: { fields?: string, status: "Pending" | "
     try {
         const transactions = await prisma.transaction.findMany({
             where: { status: options?.status || undefined },
+            orderBy: { createdAt: "desc" },
             select: TransactionSelect(options.fields),
         });
         return TransactionReturns(transactions, options.fields);
@@ -38,7 +39,8 @@ export async function FindAll(fields?: string): Promise<TransactionType[]> {
     try {
         const transactions = await prisma.transaction.findMany({
             select: TransactionSelect(fields),
-            take: 50
+            take: 50,
+            orderBy: { createdAt: "desc" }
         });
         return TransactionReturns(transactions, fields);
     } catch (error: any) {

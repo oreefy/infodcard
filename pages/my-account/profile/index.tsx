@@ -25,7 +25,7 @@ function MultipleProfile({ profiles, profileLength, fulfill }: { profiles: any[]
                 {profiles?.length <= 0 && <div className="box mb-0">
                     <h2 className="text-center py-10 px-4">No Profile Found.</h2>
                 </div>}
-                {profiles?.length >= 1 && updator && <UpdateProfile profile={updator} />}
+                {profiles?.length >= 1 && updator && <><UpdateProfile profile={updator} /></>}
                 {profiles?.length >= 1 && !updator && <>
                     <div className="grid grid-cols-1 gap-3">
                         {profiles?.map((account, index) => {
