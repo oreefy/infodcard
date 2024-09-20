@@ -1,23 +1,37 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { Response } from '@/middleware/http';
 import { Auth } from '@/middleware/auth';
-import Validate from '@/middleware/validate';
-import File from '@/middleware/file';
-
-export const config = { api: { bodyParser: false } };
+import { ProfileModel } from '@/models';
 
 export default async function UpdateProfile(req: NextApiRequest, res: NextApiResponse) {
     try {
+        const body = JSON.parse(req.body);
+        const data = {
+            profileLink: body.profileLink || undefined,
+            link: body.link || undefined,
+            name: body.name || undefined,
+            phone: body.phone || undefined,
+            bio: body.bio || undefined,
+            youtube: body.youtube || undefined,
+            profession: body.profession || undefined,
+            email: body.email || undefined,
+            address: body.address || undefined,
+            company: body.company || undefined,
+            designation: body.designation || undefined,
+            companyphone: body.companyphone || undefined,
+            companyemail: body.companyemail || undefined,
+            website: body.website || undefined,
+            corporate: body.corporate || undefined,
+            branch: body.branch || undefined,
+        }
         const user = await Auth(req, res);
         if (user) {
-            const body = await Validate(req, [{ field: "cover", maxFiles: 1, maxTotalFileSize: 5 * 2024 * 2024, extensions: ['.png', '.jpg', '.jpeg'] }]);
-            if (body.validation) {
-                await File.upload("/public/uploads", body.files[0].uploads);
-                Response(res, { message: "Your profile photo has been successfully updated." }, 200);
+            const update = await ProfileModel.update(data);
+            if (update) {
+                Response(res, { profile: update, errors: [] }, 200);
             } else {
-                await File.cleanup(body.files[0].uploads);
-                Response(res, { message: "The data was not structured.", errors: body }, 406);
-            };
+                Response(res, { errors: [{ type: "other", success: false, message: "Failed to update the profile." }] }, 500);
+            }
         }
     } catch (error: any) { await Response(res, { message: error.message }, 500); }
 }

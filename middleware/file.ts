@@ -13,17 +13,19 @@ const File = {
             return false;
         }
     },
-    upload: async function (destination: string, files: any): Promise<boolean> {
+    upload: async function (destination: string, files: any): Promise<{ status: boolean; uploads: { filepath: string; filename: string }[] }> {
         try {
+            const response: { status: boolean; uploads: { filepath: string; filename: string }[] } = { status: true, uploads: [] };
             for (const file of files) {
                 const tempPath = file.filepath;
                 const targetPath = path.join(process.cwd(), destination, file.newFilename + path.extname(file.originalFilename));
                 await sharp(tempPath).resize({ width: 600 }).toFile(targetPath)
                 await fs.promises.unlink(tempPath);
+                response.uploads.push({ filepath: destination + "/" + file.newFilename + path.extname(file.originalFilename), filename: file.newFilename + path.extname(file.originalFilename) });
             }
-            return true;
+            return response;
         } catch (error) {
-            return false;
+            return { status: false, uploads: [] };
         }
     },
     cleanup: async function (files: any[]): Promise<boolean> {

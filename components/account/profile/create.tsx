@@ -24,7 +24,6 @@ export default function CreateProfile() {
                 }
             })
         }
-
     }, [link]);
     const createProfile = (event: any) => {
         event.preventDefault();
@@ -40,11 +39,6 @@ export default function CreateProfile() {
             bio: event.target?.bio.value || "",
             profession: event.target?.profession.value || "",
             address: event.target?.address.value || "",
-            // socials: [
-            //     { title: "Website", link: event.target.website.value || "", type: true, logo: "bi bi-globe" },
-            //     { title: "Facebook", link: event.target.facebook.value || "", type: true, logo: "bi bi-facebook" },
-            //     { title: "WhatsApp", link: event.target.whatsapp.value && `https://wa.me/${event.target.whatsapp.value ? event.target.whatsapp.value.includes("+") ? event.target.whatsapp.value : "+" + event.target.whatsapp.value : ""}`, type: true, logo: "bi bi-whatsapp" }
-            // ]
         }
         Fetch("/api/account/profile/create", { method: "POST", body: input }).then((res) => {
             if (res.status === 200) {

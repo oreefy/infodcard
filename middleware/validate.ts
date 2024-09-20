@@ -1,7 +1,6 @@
 import { IncomingForm, Files } from 'formidable';
 import type { NextApiRequest } from 'next';
 import path from 'node:path';
-import { Random } from 'primepack';
 
 function Parser(request: NextApiRequest): Promise<{ fields: any; files: Files }> {
     const form = new IncomingForm({
