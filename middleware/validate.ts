@@ -116,6 +116,7 @@ export default async function Validate(
     }[];
 }> {
     try {
+
         const parsed = await Parser(request);
         let verified: boolean = true;
         const files: any = [];
@@ -126,6 +127,7 @@ export default async function Validate(
         });
         return { validation: verified, fields: parsed.fields, files: files };
     } catch (error: any) {
+
         return { validation: false, fields: {}, files: [] };
     }
 }

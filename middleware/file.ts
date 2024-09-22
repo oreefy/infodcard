@@ -29,6 +29,7 @@ const File = {
         }
     },
     cleanup: async function (files: any[]): Promise<boolean> {
+
         try {
             for (const file of files) {
                 const tempPath = file.filepath;
@@ -39,6 +40,15 @@ const File = {
             return true;
         } catch (error) {
             console.log('Error during file cleanup:', error);
+            return false;
+        }
+    },
+    delete: async function (filepath: string): Promise<boolean> {
+        try {
+            const targetPath = path.join(process.cwd(), filepath);
+            await fs.promises.unlink(targetPath);
+            return true;
+        } catch (error) {
             return false;
         }
     }

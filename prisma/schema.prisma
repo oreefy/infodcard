@@ -1,6 +1,6 @@
 generator client {
   provider = "prisma-client-js"
-  // output   = "../.db-config"
+  //output   = "../node_modules/@prisma/oreefy-engine"
 }
 
 datasource db {
