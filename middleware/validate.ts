@@ -5,7 +5,7 @@ import path from 'node:path';
 function Parser(request: NextApiRequest): Promise<{ fields: any; files: Files }> {
     const form = new IncomingForm({
         keepExtensions: true,
-        uploadDir: path.join(process.cwd(), "/public/temp"),
+        uploadDir: path.join(process.cwd(), "/uploads/temp"),
         filename: (name, ext, part, form) => {
             return `${new Date().getTime()}${Math.random() * Math.random()}`;
         },

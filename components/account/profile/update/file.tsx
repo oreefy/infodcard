@@ -1,5 +1,6 @@
 import Fetch from "@/fetch";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -60,24 +61,31 @@ export default function File({ plan, profile }: { plan: "FREE" | "PREMIUM" | "BU
                         <Image className="w-full h-full object-cover object-center" src={cover} width={600} height={500} alt="Cover Photo"></Image>
                     </div>
                     <div className="grid grid-cols-2 gap-3 p-3 items-center">
-                        <div className="flex w-28 h-28 md:h-40 md:w-40 xl:w-52 xl:h-52 max-w-full">
-                            <Image className="w-full h-full rounded-full outline outline-4 outline-white object-cover object-center" src={avatar} width={300} height={300} alt="Avatar"></Image>
+                        <div className="-mt-20">
+                            <div className="flex w-28 h-28 md:h-40 md:w-40 xl:w-52 xl:h-52 max-w-full">
+                                <Image className="w-full h-full rounded-full outline outline-4 outline-white object-cover object-center" src={avatar} width={300} height={300} alt="Avatar"></Image>
+                                <div>
+                                    <form className="-ml-28 md:-ml-40 xl:-ml-52 w-28 h-28 md:h-40 md:w-40 xl:w-52 xl:h-52 bg-black/60 rounded-full flex items-center justify-center" onSubmit={(event) => uploadcover(event, "avatar")}>
+                                        <label>
+                                            <input onChange={(event) => update(event, "avatar")} className="inp-text" type="file" hidden={true} accept="image/png, image/jpg, image/jpeg" name="avatar" placeholder="Avatar" required />
+                                            {!loader && <span className="py-1 px-2 cursor-pointer active:scale-75 duration-200 rounded-lg text-xs md:text-base border-2 border-green-600 text-green-700 inline-block">{fileBtn === "avatar" ? "Change" : <i className="bi bi-camera"></i>}</span>}
+                                        </label>
+                                        {fileBtn === "avatar" ? loader === "avatar" ? <span className="py-1 px-2 cursor-pointer active:scale-75 duration-200 rounded-lg text-xs md:text-base border-2 border-blue-600 text-blue-600 inline-block">Wait...</span> : <button className="py-1 px-2 cursor-pointer active:scale-75 duration-200 rounded-lg text-xs md:text-base border-2 border-green-600 text-green-700 inline-block" type="submit" title="Avatar"><i className="bi bi-check-lg"></i></button> : null}
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <form className="flex flex-wrap gap-1 justify-end mb-2" onSubmit={(event) => uploadcover(event, "cover")}>
+                        <div className="-mt-14 md:-mt-20 xl:-mt-[140px]">
+                            <form className="flex flex-wrap gap-1 justify-end mb-6 md:mb-10" onSubmit={(event) => uploadcover(event, "cover")}>
                                 <label>
                                     <input onChange={(event) => update(event, "cover")} className="inp-text" type="file" hidden={true} accept="image/png, image/jpg, image/jpeg" name="cover" placeholder="Cover Photo" required />
                                     {!loader && <span className="py-1 px-2 cursor-pointer active:scale-75 duration-200 rounded-lg text-xs md:text-base border-2 border-purple-600 text-purple-800 inline-block">{fileBtn === "cover" ? "Change" : "Change Cover"}</span>}
                                 </label>
                                 {fileBtn === "cover" ? loader === "cover" ? <span className="py-1 px-2 cursor-pointer active:scale-75 duration-200 rounded-lg text-xs md:text-base border-2 border-blue-600 text-blue-600 inline-block">Wait...</span> : <button className="py-1 px-2 cursor-pointer active:scale-75 duration-200 rounded-lg text-xs md:text-base border-2 border-purple-600 text-purple-800 inline-block" type="submit" title="Update"><i className="bi bi-check-lg"></i></button> : null}
                             </form>
-                            <form className="flex flex-wrap gap-1 justify-end" onSubmit={(event) => uploadcover(event, "avatar")}>
-                                <label>
-                                    <input onChange={(event) => update(event, "avatar")} className="inp-text" type="file" hidden={true} accept="image/png, image/jpg, image/jpeg" name="avatar" placeholder="Avatar" required />
-                                    {!loader && <span className="py-1 px-2 cursor-pointer active:scale-75 duration-200 rounded-lg text-xs md:text-base border-2 border-green-600 text-green-700 inline-block">{fileBtn === "avatar" ? "Change" : "Change Avatar"}</span>}
-                                </label>
-                                {fileBtn === "avatar" ? loader === "avatar" ? <span className="py-1 px-2 cursor-pointer active:scale-75 duration-200 rounded-lg text-xs md:text-base border-2 border-blue-600 text-blue-600 inline-block">Wait...</span> : <button className="py-1 px-2 cursor-pointer active:scale-75 duration-200 rounded-lg text-xs md:text-base border-2 border-green-600 text-green-700 inline-block" type="submit" title="Avatar"><i className="bi bi-check-lg"></i></button> : null}
-                            </form>
+                            <div className="flex items-center justify-center md:justify-start w-full">
+                                <Link href={"/p/" + profile.link} className="px-3 md:px-6 py-0.5 md:py-2 bg-purple-600 text-white rounded-lg active:scale-90 duration-200" type="submit"><span>View</span><i className="bi bi-dot"></i><span>{profile.visitor || 0}</span></Link>
+                            </div>
                         </div>
                     </div>
                 </div>

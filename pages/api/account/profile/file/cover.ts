@@ -13,13 +13,13 @@ export default async function ProfileFile(req: NextApiRequest, res: NextApiRespo
         if (user) {
             const body = await Validate(req, [{ field: "cover", maxFiles: 1, maxFileSize: 5 * 2024 * 2024, extensions: ['.png', '.jpg', '.jpeg'] }]);
             if (body.validation) {
-                const update = await File.upload("/public/uploads/avatars", body.files[0].uploads);
+                const update = await File.upload("/uploads/avatars", body.files[0].uploads);
                 if (update.status) {
                     const queryProfile = await ProfileModel.find.unique(body.fields.link[0], "profile.cover profile.avatar");
                     if (queryProfile?.cover !== "/default/profile.png") {
-                        File.delete("/public" + queryProfile?.cover);
+                        File.delete("/uploads" + queryProfile?.cover?.slice(11));
                     }
-                    const profile = await ProfileModel.update({ profileLink: body.fields.link[0], cover: "/uploads/avatars/" + update.uploads[0].filename }, "profile.cover profile.avatar");
+                    const profile = await ProfileModel.update({ profileLink: body.fields.link[0], cover: "/api/assets/avatars/" + update.uploads[0].filename }, "profile.cover profile.avatar");
                     if (profile) {
                         Response(res, { profile: profile, message: "The media has been successfully updated." }, 200);
                     } else {

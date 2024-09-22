@@ -12,7 +12,6 @@ export default function ProfileInfo({ plan, profile, errors }: { plan: "FREE" | 
   return (
     <>
       <div className="box p-0 m-0 overflow-hidden">
-        <h3 className="box m-0 rounded-none font-bold">Profile Info</h3>
         <div className="p-3 md:p-5 grid grid-cols-1 gap-3">
           <div><Input value={username} onChange={setUsername} plan={plan} field={db.profile.username} errors={errors} /></div>
           <div><Input value={fullname} onChange={setFullname} plan={plan} field={db.profile.fullname} errors={errors} /></div>
