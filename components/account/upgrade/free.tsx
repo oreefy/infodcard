@@ -37,7 +37,7 @@ export default function Free() {
     }
     const confirm = async (event: any) => {
         event.preventDefault();
-        setConfirmLoader(true);        
+        setConfirmLoader(true);
         if (method) {
             const data = {
                 plan: plan,
